@@ -3,10 +3,7 @@
 import sys
 import os
 import time
-import matplotlib
-matplotlib.use("Qt4Agg")
 import matplotlib.pyplot as plt
-
 import numpy as numpy
 from pylab import *
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
@@ -258,10 +255,13 @@ class My_Chronometer(QtGui.QMainWindow):
 				self.child.Table.removeRow(self.countN)
 				self.countN-=1
 				
+				
 				if Sex == "F" :
 					self.countF -=1
+					self.time_F.pop(-1)
 				elif Sex =="M" :
 					self.countM -=1
+					self.time_M.pop(-1)
 				os.remove('tmp')
 	
 	def open_project(self):
@@ -310,7 +310,7 @@ class My_Chronometer(QtGui.QMainWindow):
 			self.child.Table.verticalScrollBar().setValue(self.countN-10)
 			
 			self.time_F.append(time.time()-self.Deb)
-			#self.Plot.Print_Plot(self.time_F, self.time_M)
+			self.Show_Plot()
 			
 			
 	def printimemal(self):
@@ -330,7 +330,7 @@ class My_Chronometer(QtGui.QMainWindow):
 			self.child.Table.verticalScrollBar().setValue(self.countN-10)
 			
 			self.time_M.append(time.time()-self.Deb)
-			#self.Plot.Print_Plot(self.time_F, self.time_M)
+			self.Show_Plot()
 			
 
 	def Show_Plot (self) : 
